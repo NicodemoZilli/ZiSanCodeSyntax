@@ -69,8 +69,7 @@ function printFileContents (contents) {
   lines.forEach(line => area.textContent += line + '\n');
   lines.forEach(line => cod += line + '\n');
 
-  var input = document.getElementById('area');
-  input.style.backgroundColor="#fff";
+  area.style.backgroundColor="#fff";
 
 }
 
@@ -87,14 +86,13 @@ function getSyntax(){
   return false;
 }
 function AME(rtx){
-  var input = document.getElementById('area');
   alertmsj("Aviso",rtx);
 
     if( rtx == "Tu Codigo Es Valido!!"){
-      input.style.backgroundColor="rgba(0, 255, 0, 0.7)";
+      area.style.backgroundColor="rgba(0, 255, 0, 0.7)";
     }else if( rtx == "Tu Codigo No es Valido!!"){
-      input.style.backgroundColor="rgba(255,0, 0, 0.7)";
+      area.style.backgroundColor="rgba(255,0, 0, 0.7)";
     }else {
-      input.style.backgroundColor="#fff";
+      area.style.backgroundColor="#fff";
     }
 }

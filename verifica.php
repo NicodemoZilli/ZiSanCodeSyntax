@@ -11,7 +11,4 @@ if(isset($_REQUEST["Scodigo"])){
 }else {
   echo "No se Recibio nada";
 }
-
-
-
  ?>
