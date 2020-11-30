@@ -7,7 +7,7 @@ if(isset($_REQUEST["Scodigo"])){
   if($Scodigo!="Holis")
     echo "Tu Codigo No es Valido!!";
   else
-    echo "Tu Codigo Es Valido!!"+$Scodigo;
+    echo "Tu Codigo Es Valido!!";
 }else {
   echo "No se Recibio nada";
 }
