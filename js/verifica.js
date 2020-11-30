@@ -1,27 +1,42 @@
 document.write("<script type='text/javascript' src='js/ajax.js'></script>");
+document.write("<script src='https://cdn.jsdelivr.net/npm/sweetalert2@9'></script>");
+
+function alertmsj(tit,msj){
+  var titulo=tit;
+  var mensaje=msj;
+  Swal.fire({
+    title: titulo,
+    text: mensaje,
+    confirmButtonText: "Ok",
+    confirmButtonColor: "#D4AC0D",
+  });
+}
+
+
 
 let cod ="";
 
 document.getElementById("carga").addEventListener('change', leerArchivo, false);
 
 function leerArchivo(e) {
+
   var archivo = e.target.files[0];
   if (!archivo) {
+    alertmsj("Error!","No es un Archivo");
     return;
   }
-  var lector = new FileReader();
-  lector.onload = function(e) {
-    var contenido = e.target.result;
-    printFileContents(contenido);
-  };
-  lector.readAsText(archivo);
+
+  if (archivo.type === 'text/plain') {
+    var lector = new FileReader();
+    lector.onload = function(e) {
+      var contenido = e.target.result;
+      printFileContents(contenido);
+    };
+    lector.readAsText(archivo);
+  }else {
+    alertmsj("Error!","No es un archivo txt");
+  }
 }
-
-/*function mostrarContenido(contenido) {
-  var elemento = document.getElementById('area');
-  elemento.innerHTML = contenido;
-}*/
-
 
 let area = document.getElementById('area');
 
@@ -32,12 +47,17 @@ function readFile (e) {
   e.preventDefault();
   let file = e.dataTransfer.files[0];
 
+  if (!file) {
+    alertmsj("Error!","No es un Archivo");
+    return;
+  }
+
   if (file.type === 'text/plain') {
     let reader = new FileReader();
     reader.onloadend = () => printFileContents(reader.result);
     reader.readAsText(file, 'ISO-8859-1');
   } else {
-    alert('¡He dicho archivo de texto!');
+    alertmsj("Error!","No es un archivo txt");
   }
 }
 
@@ -48,6 +68,9 @@ function printFileContents (contents) {
 
   lines.forEach(line => area.textContent += line + '\n');
   lines.forEach(line => cod += line + '\n');
+
+  var input = document.getElementById('area');
+  input.style.backgroundColor="#fff";
 
 }
 
@@ -65,14 +88,13 @@ function getSyntax(){
 }
 function AME(rtx){
   var input = document.getElementById('area');
-  var output = document.getElementById('info');
-  output.innerHTML = rtx;
+  alertmsj("Aviso",rtx);
 
-    if( rtx == "Codigo Valido!!"){
+    if( rtx == "Tu Codigo Es Valido!!"){
       input.style.backgroundColor="rgba(0, 255, 0, 0.7)";
-    }else if( rtx == "Codigo No Valido!!"){
+    }else if( rtx == "Tu Codigo No es Valido!!"){
       input.style.backgroundColor="rgba(255,0, 0, 0.7)";
     }else {
-      input.style.backgroundColor="rgba(0,0, 150, 0.7)";
+      input.style.backgroundColor="#fff";
     }
 }
