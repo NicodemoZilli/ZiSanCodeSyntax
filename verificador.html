@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/fontello.css">
+    <link rel="stylesheet" href="css/verifica.css">
+    <link rel="shortcut icon" type="image/x-icon" href="media/imgs/fox.png">
+
+    <title>ZiSan Code Syntax</title>
+  </head>
+  <body>
+  <header>
+    <div class="contenedor">
+      <h1 class="icon-firefox">ZiSan</h1>
+      <input type="checkbox" id="menu-bar">
+      <label class="icon-menu" for="menu-bar"></label>
+      <nav class="menu">
+        <a href="../LAIIProg">Inicio</a>
+        <a href="verificador.html">Verificador</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section id="banner">
+      <img src="media/imgs/img3.png" alt="Imagen Img1 Banner">
+      <div class="contenedor">
+        <h2>Estructura ZiSan</h2>
+        <p>Puedes ver la documentaci&oacute;n a continuaci&oacute;n</p><br>
+        <a href="pdf/datasheet.pdf" target="_blank">DataSheet</a>
+        <a href="pdf/grafo.pdf" target="_blank">Grafo</a>
+      </div>
+    </section>
+
+
+    <section id="Bienvenidos">
+      <h2>Verificador de Sint&aacute;xis</h2><br>
+
+        <div id="area">
+        <h3>Suelta aqu&iacute; un archivo de texto</h3>
+        </div>
+          <input type="file" id="carga" name="archivo" accept="text/plain" required>
+          <label for="carga" id="labelcarga">
+            <h3>Sube un archivo</h3>
+          </label>
+          <br>
+          <br>
+          <input type="button" id="envia">
+          <label for="envia" id="labelenvia"><h3>Envia txt</h3></label>
+
+    </section>
+
+
+    <section id="info">
+        <h2 id="output"></h2>
+    </section>
+
+  </main>
+
+    <footer>
+      <div class="contenedor">
+        <p class="copy">ZiSan &copy 2020</p>
+        <div class="sociales">
+          <a href="https://www.facebook.com/nzillivazquez" target="_blank"
+          class="icon-facebook"></a>
+          <a href="https://www.instagram.com/nicodemozilli/" target="_blank"
+          class="icon-instagram"></a>
+          <a href="https://twitter.com/ZvNico?s=08" target="_blank"
+          class="icon-twitter"></a>
+        </div>
+      </div>
+    </footer>
+    <script src="js/verifica.js" charset="utf-8"></script>
+
+  </body>
+</html>
