@@ -8,3 +8,9 @@
 .github img{
   width: 100px;
 }
+
+.codeframe{
+  height: 350px;
+  overflow: auto;
+  margin-bottom: 30px;
+}
