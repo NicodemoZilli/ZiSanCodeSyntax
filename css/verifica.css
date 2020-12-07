@@ -41,6 +41,7 @@
 }
 
 #area{
+  text-align: justify;
   border: 3px dashed #aaa;
   border-radius: 5px;
   color: #555;
