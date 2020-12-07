@@ -45,18 +45,19 @@
   border: 3px dashed #aaa;
   border-radius: 5px;
   color: #555;
-  display: flex;
+  display: block;
   flex-flow: column nowrap;
   font-size: 15px;
-  height: 80vh;
   justify-content: center;
-  max-height: 400px;
+  height: 400px;
   margin: 30px auto;
   overflow: auto;
   padding: 25px;
   white-space: pre-line;
   width: 80%;
   max-width: 600px;
+  line-height: 25px;
+  font-family: monospace;
 }
 
 h3 {

@@ -62,16 +62,12 @@ function readFile (e) {
 }
 
 function printFileContents (contents) {
-  area.style.lineHeight = '30px';
-  area.textContent = '';
+
   let lines = contents.split(/\n/);
-
-  lines.forEach(line => area.textContent += line + '\n');
   lines.forEach(line => cod += line + '\n');
-
   area.style.backgroundColor="#fff";
-  console.log(cod);
-
+  area.textContent = '';
+  area.textContent=cod;
 }
 
 
