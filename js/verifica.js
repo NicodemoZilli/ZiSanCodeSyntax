@@ -70,6 +70,7 @@ function printFileContents (contents) {
   lines.forEach(line => cod += line + '\n');
 
   area.style.backgroundColor="#fff";
+  console.log(cod);
 
 }
 
