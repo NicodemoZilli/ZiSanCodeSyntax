@@ -64,10 +64,13 @@ function readFile (e) {
 function printFileContents (contents) {
 
   let lines = contents.split(/\n/);
+  cod="";
   lines.forEach(line => cod += line + '\n');
   area.style.backgroundColor="#fff";
   area.textContent = '';
   area.textContent=cod;
+  document.getElementById('output').innerHTML="";
+
 }
 
 
@@ -76,20 +79,28 @@ document.getElementById('envia').addEventListener('click',getSyntax,false);
 function getSyntax(){
   console.log(cod);
   getRequest(
-      "verifica.php?Scodigo="+cod,
+      "reader/reader.php?Scodigo="+cod,
        AME,
        drawError
   );
   return false;
 }
-function AME(rtx){
-  alertmsj("Aviso",rtx);
+function AME(rt){
+  var rtx = JSON.parse(rt);
+  alertmsj("Aviso",rtx[0]);
 
-    if( rtx == "Tu Codigo Es Valido!!"){
+    if( rtx.s == "Código Valido!!"){
       area.style.backgroundColor="rgba(0, 255, 0, 0.7)";
-    }else if( rtx == "Tu Codigo No es Valido!!"){
+    }else{
       area.style.backgroundColor="rgba(255,0, 0, 0.7)";
-    }else {
-      area.style.backgroundColor="#fff";
     }
+  document.getElementById('output').innerHTML=rtx[1];
+
+}
+document.getElementById('VerP').addEventListener('click',VerP,false);
+function VerP(){
+  var c = document.getElementById('output');
+  if(c.style.display=="none") c.style.display="block";
+  else c.style.display="none";
+
 }

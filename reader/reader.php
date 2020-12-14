@@ -1,49 +1,70 @@
  <?php
  /**
-  * Demostrar lectura de hoja de cálculo o archivo
-  * de Excel con PHPSpreadSheet: leer determinada fila
-  * y columna por coordenadas
-  *
   * @author nicodemozilli
   */
- # Cargar librerias y cosas necesarias
- require_once "vendor/autoload.php";
 
- # Indicar que usaremos el IOFactory
- use PhpOffice\PhpSpreadsheet\IOFactory;
+require_once "vendor/autoload.php";
+use PhpOffice\PhpSpreadsheet\IOFactory;
 
- # Recomiendo poner la ruta absoluta si no está junto al script
- # Nota: no necesariamente tiene que tener la extensión XLSX
- $rutaArchivo = "LibroParaLeerConPHP.xlsx";
- $documento = IOFactory::load($rutaArchivo);
+$rootfile= "../pdf/tabla.xlsx";
+$file = IOFactory::load($rootfile);
+$sheet = $file->getSheet(0);
 
- # Recuerda que un documento puede tener múltiples hojas
- # obtener conteo e iterar
- $totalDeHojas = $documento->getSheetCount();
+$Scodigo="";
 
- # Iterar hoja por hoja
- for ($indiceHoja = 0; $indiceHoja < $totalDeHojas; $indiceHoja++) {
+if(isset($_REQUEST["Scodigo"])){
+  $Scodigo = $_REQUEST["Scodigo"];
+  echo json_encode(validC($Scodigo));
+}else {
+  echo "No se ha recibio nada!!";
+}
 
-     # Obtener hoja en el índice que vaya del ciclo
-     $hojaActual = $documento->getSheet($indiceHoja);
-     echo "<h3>Vamos en la hoja con índice $indiceHoja</h3>";
+   function getState($cst,$rc){
+    $sheet = $GLOBALS['sheet'];
+    if(ord($rc) == 32) $rc = 'œ';
+    else if (ord($rc)==10 ) $rc="Ç";
 
-     $coordenadas = "A1";
+    $nr=0;
+    foreach ($sheet->getRowIterator() as $row) {
 
-     # Lo que hay en A1
-     $celda = $hojaActual->getCell($coordenadas);
-     # El valor, así como está en el documento
-     $valorRaw = $celda->getValue();
+      $state = $sheet->getCell("A".$nr)->getValue();
 
-     # Formateado por ejemplo como dinero o con decimales
-     $valorFormateado = $celda->getFormattedValue();
+      $cellIterator = $row->getCellIterator();
+      $cellIterator->setIterateOnlyExistingCells(TRUE);
+      foreach ($cellIterator as $key => $cell) {
+        $simbol = $sheet->getCell($key."1")->getValue();
+          if($state==$cst && ord($simbol)==ord($rc)){
+            return trim($sheet->getCell($key.$nr)->getValue());
+          }
+      }
+      $nr++;
+    }
+  }
 
-     # Si es una fórmula y necesitamos su valor, llamamos a:
-     $valorCalculado = $celda->getCalculatedValue();
 
-     # Imprimir
-     echo "En <strong>$coordenadas</strong> tenemos el valor <strong>$valorRaw</strong>. ";
-     echo "Formateado es: <strong>$valorFormateado</strong>. ";
-     echo "Calculado es: <strong>$valorCalculado</strong><br><br>";
+  function validC($cod){
+    $ct="q0";
+    $act="";
+    $codv="";
+    $nl=1;
+    $cl="";
+    for($i=0; $i<strlen($cod); $i++){
 
- }
+      if($cod[$i]=="\n") $nl++;
+      $codv=$codv."<p>Estado Actual: ".$ct." Caracter Leido: ".$cod[$i]."</p><br>";
+      $cl=$cl.$cod[$i];
+
+      $act = getState($ct,$cod[$i]);
+      if($act == "q190"){
+        $vec[0]="Código Valido!!";
+        $vec[1]=$codv;
+        return $vec;
+      }else if($act=="q24"){
+        $vec[0]= "Código No Valido!! ". PHP_EOL ." Error en la linea: ".$nl." Cerca de: ".$cl;
+        $vec[1]= $codv;
+        return $vec;
+      }
+      $ct = $act;
+    }
+  }
+ ?>
