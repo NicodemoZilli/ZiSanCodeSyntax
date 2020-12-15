@@ -7,6 +7,7 @@ function alertmsj(tit,msj){
   Swal.fire({
     title: titulo,
     text: mensaje,
+    allowOutsideClick: false,
     confirmButtonText: "Ok",
     confirmButtonColor: "#D4AC0D",
   });
@@ -14,12 +15,13 @@ function alertmsj(tit,msj){
 
 
 
-let cod ="";
+let area = document.getElementById('area');
 
 document.getElementById("carga").addEventListener('change', leerArchivo, false);
 
 function leerArchivo(e) {
-
+  area.style.backgroundColor="#fff";
+  area.textContent = '';
   var archivo = e.target.files[0];
   if (!archivo) {
     alertmsj("Error!","No es un Archivo");
@@ -38,12 +40,12 @@ function leerArchivo(e) {
   }
 }
 
-let area = document.getElementById('area');
-
 area.addEventListener('dragover', e => e.preventDefault());
 area.addEventListener('drop', readFile);
 
 function readFile (e) {
+  area.style.backgroundColor="#fff";
+  area.textContent = '';
   e.preventDefault();
   let file = e.dataTransfer.files[0];
 
@@ -61,41 +63,80 @@ function readFile (e) {
   }
 }
 
+
+let cod;
+var jObject;
+
+
 function printFileContents (contents) {
+  cod=new Array();
+  jObject={};
 
-  let lines = contents.split(/\n/);
-  cod="";
-  lines.forEach(line => cod += line + '\n');
-  area.style.backgroundColor="#fff";
-  area.textContent = '';
-  area.textContent=cod;
-  document.getElementById('output').innerHTML="";
-
+  area.textContent=contents;
+  //let lines = contents.split(/\n/);
+  //lines.forEach(line => cod += line + "\n");
+  document.getElementById('output').innerHTML=" ";
+  for (var i in contents) {
+    if(contents[i].charCodeAt(0)==10) cod[i]='195';//cod+=String.fromCharCode(195);
+    else if(contents[i].charCodeAt(0)==32) cod[i]='197';//cod+=String.fromCharCode(197);
+    else cod[i]=contents[i];
+  }
+  //cod=contents;
+  //Lo convierto a objeto
+    for(i in cod)
+    {
+        jObject[i] = cod[i];
+    }
+}
+function encode_utf8(s) {
+  return unescape(encodeURIComponent(s));
 }
 
+function decode_utf8(s) {
+  return decodeURIComponent(escape(s));
+}
 
 document.getElementById('envia').addEventListener('click',getSyntax,false);
 
 function getSyntax(){
-  console.log(cod);
+  //console.log(cod);
+  //console.log(jObject);
+  //function getRequest(url, method, data, async, success, error, msg)
   getRequest(
-      "reader/reader.php?Scodigo="+cod,
-       AME,
-       drawError
-  );
+      "reader/reader.php?Scodigo="+JSON.stringify(jObject), //"reader/reader.php",
+      "POST",
+      null,//{jObject: JSON.stringify(jObject)},
+      true,
+      AME,
+      drawError,
+      loadingmsg
+    );
   return false;
 }
 function AME(rt){
   var rtx = JSON.parse(rt);
   alertmsj("Aviso",rtx[0]);
 
-    if( rtx.s == "Código Valido!!"){
+    if( rtx[0] == "Código Valido!!"){
       area.style.backgroundColor="rgba(0, 255, 0, 0.7)";
+    }else if(rtx[0] == "Error de Sintaxis en algun punto!!"){
+      area.style.backgroundColor="rgba(243, 156, 18, 0.7)";
     }else{
       area.style.backgroundColor="rgba(255,0, 0, 0.7)";
     }
   document.getElementById('output').innerHTML=rtx[1];
 
+}
+
+function loadingmsg(){
+  Swal.fire({
+  title: 'Cargando...',
+  showConfirmButton: false,
+  allowOutsideClick: false,
+  onBeforeOpen: () => {
+      Swal.showLoading()
+  }
+});
 }
 document.getElementById('VerP').addEventListener('click',VerP,false);
 function VerP(){

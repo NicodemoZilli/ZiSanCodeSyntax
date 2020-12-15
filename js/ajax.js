@@ -30,7 +30,7 @@ function drawOutput(responseText) {
     container.innerHTML = responseText;
 }
 // helper function for cross-browser request object
-function getRequest(url, success, error) {
+function getRequest(url, method, data, async, success, error, msg) {
     var req = false;
     try{
         // most browsers
@@ -52,13 +52,16 @@ function getRequest(url, success, error) {
     if (typeof success != 'function') success = function () {};
     if (typeof error!= 'function') error = function () {};
     req.onreadystatechange = function(){
+      if(req.readyState == 1){
+        msg();
+      }
         if(req .readyState == 4){
             return req.status === 200 ?
                 success(req.responseText) : error(req.status)
             ;
         }
     }
-    req.open("POST", url, true);
-    req.send(null);
+    req.open(method, url, async);
+    req.send(data);
     return req;
 }
