@@ -55,7 +55,7 @@ echo json_encode(validC($Scodigo));
     $codv="";
     $nl=1;
     $cl="";
-    for($i=0; $i<sizeof($cod); $i++){
+    for($i=0; $i<count($cod); $i++){
 
       if($cod[$i]=='195') $nl++;
 
