@@ -65,7 +65,7 @@ function readFile (e) {
 
 
 let cod;
-var jObject;
+let jObject = null;
 
 
 function printFileContents (contents) {
@@ -102,16 +102,19 @@ function getSyntax(){
   //console.log(cod);
   //console.log(jObject);
   //function getRequest(url, method, data, async, success, error, msg)
-  getRequest(
-      "reader/reader.php?Scodigo="+JSON.stringify(jObject), //"reader/reader.php",
-      "POST",
-      null,//{jObject: JSON.stringify(jObject)},
-      true,
-      AME,
-      drawError,
-      loadingmsg
-    );
-  return false;
+  if(jObject!=null){
+    getRequest(
+        "reader/reader.php?Scodigo="+JSON.stringify(jObject), //"reader/reader.php",
+        "POST",
+        null,//{jObject: JSON.stringify(jObject)},
+        true,
+        AME,
+        drawError,
+        loadingmsg
+      );
+  }else{
+    alertmsj("Error!","No se ha subido ningun archivo");
+  }
 }
 function AME(rt){
   var rtx = JSON.parse(rt);
@@ -119,8 +122,6 @@ function AME(rt){
 
     if( rtx[0] == "Código Valido!!"){
       area.style.backgroundColor="rgba(0, 255, 0, 0.7)";
-    }else if(rtx[0] == "Error de Sintaxis en algun punto!!"){
-      area.style.backgroundColor="rgba(243, 156, 18, 0.7)";
     }else{
       area.style.backgroundColor="rgba(255,0, 0, 0.7)";
     }

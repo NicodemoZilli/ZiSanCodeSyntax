@@ -70,12 +70,7 @@ echo json_encode(validC($Scodigo));
 
       $codv=$codv."<p>Estado Actual: ".$ct." Caracter Leido: ".$ca." Avanza a: ".$act."</p>";
 
-      if($act == "q190"){
-        $codv=$codv."<p>Estado Final: ".$act." Caracter Leido: ".$ca."</p>";
-        $vec[0]="Código Valido!!";
-        $vec[1]=$codv;
-        return $vec;
-      }else if($act=="q24"){
+      if($act=="q24"){
         $codv=$codv."<p>Estado Final: ".$act." Caracter Leido: ".$ca."</p>";
         $vec[0]= "Código No Valido!!   Error en la linea: ".$nl." Cerca de: ".$cl;
         $vec[1]= $codv;
@@ -84,9 +79,17 @@ echo json_encode(validC($Scodigo));
 
       $ct = $act;
     }
-      $vec[0]= "Error de Sintaxis en algun punto!!";
+    if($act == "q190"){
+      $codv=$codv."<p>Estado Final: ".$act." Caracter Leido: ".$ca."</p>";
+      $vec[0]="Código Valido!!";
+      $vec[1]=$codv;
+      return $vec;
+    }else{
+      $codv=$codv."<p>Estado Final: ".$act." Caracter Leido: ".$ca."</p>";
+      $vec[0]= "Código No Valido!!   Error en la linea: ".$nl." Cerca de: ".$cl;
       $vec[1]= $codv;
-    return $vec;
+      return $vec;
+    }
   }
 
  ?>
