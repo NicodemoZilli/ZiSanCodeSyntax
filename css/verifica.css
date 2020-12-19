@@ -1,12 +1,39 @@
-
-
-
+@media (min-width:300px){
+  #labelcarga{
+    display: block;
+    margin-left:auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+  }
+  #labelenvia{
+    display: block;
+    margin-left:auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+  }
+  #labelVP{
+    display: block;
+    margin-left:auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+  }
+}
+@media (min-width:1024px){
+  #labelcarga{
+    display: inline-block;
+  }
+  #labelenvia{
+    display: inline-block;
+  }
+  #labelVP{
+    display: inline-block;
+  }
+}
 #carga{
   display: none;
 }
 #labelcarga{
   background-color: #21618C;
-  display: inline-block;
   transition: all .5s;
   cursor: pointer;
   padding: 15px 40px !important;
@@ -19,7 +46,6 @@
 }
 #labelenvia{
   background-color: #212F3C;
-  display: inline-block;
   transition: all .5s;
   cursor: pointer;
   padding: 15px 40px !important;
@@ -32,7 +58,6 @@
 }
 #labelVP{
   background-color:#17A589;
-  display: inline-block;
   transition: all .5s;
   cursor: pointer;
   padding: 15px 40px !important;
@@ -92,4 +117,8 @@
 
 h3 {
   font-weight: 400;
+}
+
+@media  {
+
 }
