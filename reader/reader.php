@@ -47,6 +47,7 @@ if(isset($_REQUEST["Scodigo"])){
       }
       $nr++;
     }
+    return 'q24'; //default para caracteries no previstos
   }
 
 
@@ -72,6 +73,8 @@ if(isset($_REQUEST["Scodigo"])){
       $act = getState($ct,$cod[$i]);
 
       $codv=$codv."<p>Estado Actual: ".$ct." Caracter Leido: ".$ca." Avanza a: ".$act."</p>";
+
+
 
       if($act=="q24"){
         $codv=$codv."<p>Estado Final: ".$act." Caracter Leido: ".$ca."</p>";
