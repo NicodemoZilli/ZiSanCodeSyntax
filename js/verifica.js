@@ -135,12 +135,13 @@ function ERR(rt){
 function AME(rt){
 try{
   var rtx = JSON.parse(rt);
-  alertmsj("Felicidades",rtx[0],'success');
 
     if( rtx[0] == "Código Valido!!"){
       area.style.backgroundColor="rgba(0, 255, 0, 0.7)";
+      alertmsj("Felicidades",rtx[0],'success');
     }else{
       area.style.backgroundColor="rgba(255,0, 0, 0.7)";
+      alertmsj("Aviso!!",rtx[0],'error');
     }
     document.getElementById('output').innerHTML=rtx[1];
 }catch(error){
