@@ -83,9 +83,12 @@ function printFileContents (contents) {
   //lines.forEach(line => cod += line + "\n");
   document.getElementById('output').innerHTML=" ";
   for (var i in contents) {
-    if(contents[i].charCodeAt(0)==10) cod[i]='195';//cod+=String.fromCharCode(195);
-    else if(contents[i].charCodeAt(0)==32) cod[i]='197';//cod+=String.fromCharCode(197);
+    if(contents[i].charCodeAt(0)==10) cod[i]='195';
+    else if(contents[i].charCodeAt(0)==32) cod[i]='197';
+    else if(contents[i].charCodeAt(0)==38) cod[i]='38';
+    else if(contents[i].charCodeAt(0)==35) cod[i]='35';
     else cod[i]=contents[i];
+    console.log(contents[i].charCodeAt(0));
   }
   //cod=contents;
   //Lo convierto a objeto
@@ -109,14 +112,12 @@ document.getElementById('envia').addEventListener('click',getSyntax,false);
 
 function getSyntax(){
   try{
-  //console.log(cod);
-  //console.log(jObject);
-  //function getRequest(url, method, data, async, success, error, msg)
+    // getRequest(url, method, data, async, success, error, msg) {
   if(jObject!=null){
     getRequest(
-        "reader/reader.php?Scodigo="+JSON.stringify(jObject), //"reader/reader.php",
+        "reader/reader.php",
         "POST",
-        null,//{jObject: JSON.stringify(jObject)},
+        JSON.stringify(jObject),
         true,
         AME,
         ERR,

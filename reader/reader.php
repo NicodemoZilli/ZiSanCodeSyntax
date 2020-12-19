@@ -14,21 +14,27 @@ $Scodigo="";
 
 if(isset($_REQUEST["Scodigo"])){
   $Scodigo = json_decode($_REQUEST["Scodigo"],true);
-}else if($_POST){
-  $Scodigo = json_decode($_POST["jObject"],true);
+  echo json_encode(validC($Scodigo));
+}else if(file_get_contents('php://input')){
+  $Scodigo = json_decode(file_get_contents('php://input'),true);
+  // $Scodigo = $aux;
+  // $v[0]=$aux;
+  // $v[1]=$Scodigo;
+  // echo json_encode($v);
+
+  echo json_encode(validC($Scodigo));
 }else {
   $v[0]="No se ha recibio nada!!";
   $v[1]=$Scodigo;
   echo json_encode($v);
 }
 
-echo json_encode(validC($Scodigo));
-
-
   function getState($cst,$rc){
     $sheet = $GLOBALS['sheet'];
     if($rc == '195') $rc = $sheet->getCell("CM1")->getValue();
     else if($rc == '197') $rc = $sheet->getCell("CN1")->getValue();
+    else if($rc == '38') $rc = $sheet->getCell("BN1")->getValue();
+    else if($rc == '35') $rc = $sheet->getCell("CG1")->getValue();
 
     $Mayus = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','Ñ','O','P','Q','R','S','T','U','V','W','X','Y','Z');
      if(array_search($rc,$Mayus)) $rc=$rc."2";
@@ -62,6 +68,8 @@ echo json_encode(validC($Scodigo));
       $ca="";
       if($cod[$i]=='195') $ca="\n";
       else if($cod[$i]=='197') $ca=" ";
+      else if($cod[$i]=='38') $ca="&";
+      else if($cod[$i]=='35') $ca="#";
       else $ca=$cod[$i];
 
       $cl=$cl.$ca;
