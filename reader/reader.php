@@ -17,11 +17,6 @@ if(isset($_REQUEST["Scodigo"])){
   echo json_encode(validC($Scodigo));
 }else if(file_get_contents('php://input')){
   $Scodigo = json_decode(file_get_contents('php://input'),true);
-  // $Scodigo = $aux;
-  // $v[0]=$aux;
-  // $v[1]=$Scodigo;
-  // echo json_encode($v);
-
   echo json_encode(validC($Scodigo));
 }else {
   $v[0]="No se ha recibio nada!!";

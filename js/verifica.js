@@ -88,7 +88,7 @@ function printFileContents (contents) {
     else if(contents[i].charCodeAt(0)==38) cod[i]='38';
     else if(contents[i].charCodeAt(0)==35) cod[i]='35';
     else cod[i]=contents[i];
-    console.log(contents[i].charCodeAt(0));
+    //console.log(contents[i].charCodeAt(0));
   }
   //cod=contents;
   //Lo convierto a objeto
