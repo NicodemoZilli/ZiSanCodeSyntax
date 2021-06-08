@@ -1,17 +1,5 @@
 @media (min-width:300px){
-  #labelcarga{
-    display: block;
-    margin-left:auto;
-    margin-right: auto;
-    margin-bottom: 20px;
-  }
-  #labelenvia{
-    display: block;
-    margin-left:auto;
-    margin-right: auto;
-    margin-bottom: 20px;
-  }
-  #labelVP{
+  #labelcarga, #labelenvia, #labelVP, #labelVC, #labelVI{
     display: block;
     margin-left:auto;
     margin-right: auto;
@@ -19,16 +7,11 @@
   }
 }
 @media (min-width:1024px){
-  #labelcarga{
-    display: inline-block;
-  }
-  #labelenvia{
-    display: inline-block;
-  }
-  #labelVP{
+  #labelcarga, #labelenvia, #labelVP, #labelVC, #labelVI{
     display: inline-block;
   }
 }
+
 #carga{
   display: none;
 }
@@ -119,6 +102,22 @@ h3 {
   font-weight: 400;
 }
 
-@media  {
 
+#labelVC{
+  background-color: #27AE60;
+  transition: all .5s;
+  cursor: pointer;
+  padding: 15px 40px !important;
+  width: fit-content;
+  text-align: center;
+  color: #fff;
+}
+#labelVI{
+  background-color:#E74C3C;
+  transition: all .5s;
+  cursor: pointer;
+  padding: 15px 40px !important;
+  width: fit-content;
+  text-align: center;
+  color: #fff;
 }

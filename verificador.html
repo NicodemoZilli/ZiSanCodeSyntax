@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/fontello.css">
-    <link rel="stylesheet" href="css/verifica.css">
+    <link rel="stylesheet" href="css/verifica.css?v=<?php echo time();?>">
     <link rel="shortcut icon" type="image/x-icon" href="media/imgs/fox.png">
+    <script type='text/javascript' src='js/ajax.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@9'></script>
     <title>ZiSan Code Syntax</title>
   </head>
   <body>
@@ -37,6 +39,14 @@
             <label for="envia" id="labelenvia"><h3>Verificar</h3></label>
             <input type="button" id="VerP">
             <label for="VerP" id="labelVP"><h3>Ver Proceso</h3></label>
+            <br>
+            <h3>Archivos con ejemplos de sint&aacute;nxis</h3>
+            <br>
+            <input type="button" id="VerCorrecto">
+            <label for="VerCorrecto" id="labelVC"><h3>Ejemplo Correcto</h3></label>
+            <input type="button" id="VerIncorrecto">
+            <label for="VerIncorrecto" id="labelVI"><h3>Ejemplo Incorrecto</h3></label>
+
     </section>
 
     <section id="info">
@@ -58,7 +68,7 @@
         </div>
       </div>
     </footer>
-    <script src="js/verifica.js" charset="utf-8"></script>
+    <script src="js/verifica.js?v=<?php echo time();?>" charset="utf-8"></script>
 
   </body>
 </html>

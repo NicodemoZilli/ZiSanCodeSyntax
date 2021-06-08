@@ -1,5 +1,3 @@
-document.write("<script type='text/javascript' src='js/ajax.js'></script>");
-document.write("<script src='https://cdn.jsdelivr.net/npm/sweetalert2@9'></script>");
 
 function alertmsj(tit,msj,icon){
   var titulo=tit;
@@ -167,4 +165,56 @@ function VerP(){
   if(c.style.display=="none") c.style.display="block";
   else c.style.display="none";
 
+}
+
+
+document.getElementById('VerCorrecto').addEventListener('click',VerC,false);
+document.getElementById('VerIncorrecto').addEventListener('click',VerI,false);
+
+function VerC (){
+  area.style.backgroundColor="#fff";
+  area.textContent = '';
+  let cad = `$$StartZiSan Quefiguraes
+
+
+#
+Programa que lee 2 numeros por consola y los compara
+Para decirle al usuario que figura se pueden formar con ellos
+Si son iguales se puede formar un cuadrado sino
+Se puede formar un rectangulo
+#
+
+&num1_->ZSRead(/Ingresa el primer Valor/);
+&num2_->ZSRead(/Ingresa el segundo Valor/);
+
+@@Lectura de valores por consola
+
+@@Condicion
+ZSIf(&num1_?=&num2_)
+
+ZSPrint(/La figura que se puede formar es un cuadrado/);
+@@Escritura en consola
+
+ZSOther
+@@caso contrario
+
+ZSPrint(/La figura que se puede formar es un rectangulo/);
+@@Escritura en consola
+
+
+$$EndZiSan`;
+  printFileContents(cad);
+}
+
+function VerI(){
+  area.style.backgroundColor="#fff";
+  area.textContent = '';
+  let cad =`$$StartZiSan suma
+  @@Definir variables
+  &num1_->8;
+  &num2_->9;
+  &resul->&num1_++&num2_;@@Error al definir la variable
+  ZSPrint(/Resultado:/::&resul);
+  $$EndZiSan `;
+  printFileContents(cad);
 }
