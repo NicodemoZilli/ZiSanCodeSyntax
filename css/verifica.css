@@ -102,7 +102,9 @@ h3 {
   font-weight: 400;
 }
 
-
+#VerCorrecto, #VerIncorrecto{
+  display: none;
+}
 #labelVC{
   background-color: #27AE60;
   transition: all .5s;
